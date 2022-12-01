@@ -5,7 +5,7 @@ from keras.layers import Input, Dense
 from keras.models import Model
 
 # Set the input and output directories
-input_dir = 'input'
+input_dir = 'input' #this folder can be considered a dataset and at the same time it will process the files from it for output
 output_dir = 'output'
 
 # Create a list of all the WAV files in the input directory
@@ -32,8 +32,10 @@ for wav_file in wav_files:
 
   # Train the autoencoder
   autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
-  autoencoder.fit(data, data, epochs=30)
+  autoencoder.fit(data, data, epochs=100)
 
   # Save the encoded and decoded audio to the output directory
   encoded_audio = autoencoder.predict(data)
   wavfile.write(os.path.join(output_dir, wav_file), rate, encoded_audio)
+  
+  #the code is rather strange, but working. Remember that it is written by a neural network
